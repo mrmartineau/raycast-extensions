@@ -1,19 +1,21 @@
 <div align="center">
   <img
-    src="https://raw.githubusercontent.com/mrmartineau/raycast-extensions/master/npms/assets/command-icon.png"
-    width="640"
+    src="https://github.com/mrmartineau/raycast-extenstions/blob/main/npms/assets/command-icon.png?raw=true"
+    width="50"
   />
 
   <h1>
-    Search npm Raycast extension
+    Search npm packages
   </h1>
+
+Raycast extension
 
   <p>
     <a href="https://www.raycast.com/mrmartineau/npms">
-        <img src="https://img.shields.io/badge/Raycast-store-red.svg"
+      <img src="https://img.shields.io/badge/Raycast-store-red.svg"
         alt="Find this extension on the Raycast store"
       />
-      </a>
+    </a>
     <a
       href="https://github.com/MrMartineau/raycast-extensions/blob/master/LICENSE"
     >
