@@ -51,3 +51,5 @@ Raycast extension to search for npm package using [npms.io](https://npms.io)
 - view the package's README in Raycast
 - view the package's Snyk vulnerability report
 - copy yarn/npm install commands to clipboard
+
+https://user-images.githubusercontent.com/64883/137721894-8860d0f6-73c9-4654-b232-96daae47235b.mp4
