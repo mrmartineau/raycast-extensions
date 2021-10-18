@@ -1,17 +1,17 @@
 <div align="center">
   <img
-    src="https://github.com/mrmartineau/raycast-extenstions/blob/main/npms/assets/command-icon.png?raw=true"
+    src="https://github.com/mrmartineau/raycast-extensions/blob/main/search-npm/assets/command-icon.png?raw=true"
     width="50"
   />
 
   <h1>
-    Search npm packages
+    Search npm
   </h1>
 
-Raycast extension
+Raycast extension to search for npm package using [npms.io](https://npms.io)
 
   <p>
-    <a href="https://www.raycast.com/mrmartineau/npms">
+    <a href="https://www.raycast.com/mrmartineau/search-npm">
       <img src="https://img.shields.io/badge/Raycast-store-red.svg"
         alt="Find this extension on the Raycast store"
       />
