@@ -105,7 +105,7 @@ const PackageListItem = ({
             />
           ) : null}
 
-          {type === 'github' || type === 'gitlab' ? (
+          {type === 'github' || (type === 'gitlab' && owner && name) ? (
             <OpenInBrowserAction
               url={`https://codesandbox.io/s/${
                 type === 'github' ? 'github' : 'gitlab'
