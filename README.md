@@ -49,8 +49,21 @@ Various Raycast extensions
   width="20"
 /> Search npm</h2>
 
+Raycast extension to search for npm package using [npms.io](https://npms.io)
+
 Find this package on the [Raycast store](https://www.raycast.com/mrmartineau/search-npm)
 
-Raycast extension to search for npm package using [npms.io](https://npms.io)
+https://user-images.githubusercontent.com/64883/139598309-f47e1478-5f4e-44f6-bbea-e33a3b2f988b.mp4
+
+# Raycast extensions
+
+<h2><img
+  src="https://github.com/mrmartineau/raycast-extensions/blob/main/search-npm/assets/command-icon.png?raw=true"
+  width="20"
+/> GitHub Stars</h2>
+
+Raycast extension to display and filter your recent GitHub stars
+
+Find this package on the [Raycast store](https://www.raycast.com/mrmartineau/github-stars)
 
 https://user-images.githubusercontent.com/64883/139598309-f47e1478-5f4e-44f6-bbea-e33a3b2f988b.mp4
