@@ -8,7 +8,7 @@
     Github Stars
   </h1>
 
-Raycast extension to view and filter your GitHub stars
+Raycast extension to display and filter your recent GitHub stars
 
   <p>
     <a href="https://www.raycast.com/mrmartineau/github-stars">
@@ -52,4 +52,4 @@ Raycast extension to view and filter your GitHub stars
 - set your GitHub username
 - set the number of results to display
 
-https://user-images.githubusercontent.com/64883/139598309-f47e1478-5f4e-44f6-bbea-e33a3b2f988b.mp4
+https://user-images.githubusercontent.com/64883/139605590-8479fe80-e0b8-41ea-9fe6-183bb6e4832f.mp4
