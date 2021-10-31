@@ -60,12 +60,6 @@ export const PackageListItem = ({
             />
           </ActionPanel.Section>
           <ActionPanel.Section title="Info">
-            <OpenInBrowserAction
-              url={`https://bundlephobia.com/package/${pkg.name}`}
-              title="Open Bundlephobia"
-              icon={Icon.LevelMeter}
-              shortcut={{ modifiers: ['cmd', 'shift'], key: 'enter' }}
-            />
             {type === 'github' && owner && name ? (
               <PushAction
                 title="View readme"
@@ -73,6 +67,12 @@ export const PackageListItem = ({
                 icon={Icon.TextDocument}
               />
             ) : null}
+            <OpenInBrowserAction
+              url={`https://bundlephobia.com/package/${pkg.name}`}
+              title="Open Bundlephobia"
+              icon={Icon.LevelMeter}
+              shortcut={{ modifiers: ['cmd', 'shift'], key: 'enter' }}
+            />
             {pkg.links?.repository && type === 'github' ? (
               <OpenInBrowserAction
                 url={pkg.links.repository.replace('github.com', 'github.dev')}
@@ -111,19 +111,12 @@ export const PackageListItem = ({
               }}
             />
           </ActionPanel.Section>
-          <ActionPanel.Section title="Install">
+          <ActionPanel.Section title="Copy">
             <CopyInstallCommandActions name={pkg.name} />
             <CopyToClipboardAction
-              title={`Copy Yarn Install Command`}
-              content={`yarn install ${pkg.name}`}
-            />
-            <CopyToClipboardAction
-              title={`Copy npm Install Command`}
-              content={`npm install ${pkg.name}`}
-            />
-            <CopyToClipboardAction
-              title={`Copy Package Name`}
+              title="Copy Package Name"
               content={pkg.name}
+              shortcut={{ modifiers: ['cmd'], key: 'c' }}
             />
           </ActionPanel.Section>
         </ActionPanel>

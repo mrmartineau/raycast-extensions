@@ -28,7 +28,7 @@ export const CopyInstallCommandActions = ({
 
   const yarnAction = (
     <CopyToClipboardAction
-      title={`Copy Yarn Install Command`}
+      title="Copy Yarn Install Command"
       content={`yarn add ${name}`}
       shortcut={
         defaultCopyAction === 'yarn' ? defaultShortcut : alternateShortcut
@@ -38,7 +38,7 @@ export const CopyInstallCommandActions = ({
 
   const npmAction = (
     <CopyToClipboardAction
-      title={`Copy npm Install Command`}
+      title="Copy npm Install Command"
       content={`npm install ${name}`}
       shortcut={
         defaultCopyAction === 'npm' ? defaultShortcut : alternateShortcut
