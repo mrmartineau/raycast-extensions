@@ -52,4 +52,4 @@ Raycast extension to display and filter your recent GitHub stars
 - set your GitHub username
 - set the number of results to display
 
-https://user-images.githubusercontent.com/64883/139605590-8479fe80-e0b8-41ea-9fe6-183bb6e4832f.mp4
+https://user-images.githubusercontent.com/64883/139749757-0cc71b6a-182b-41ad-8890-df302331eef7.mp4
