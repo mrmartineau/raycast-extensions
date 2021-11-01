@@ -1,7 +1,7 @@
 <div align="center">
   <img
-    src="https://github.com/mrmartineau/raycast-extensions/blob/main/search-npm/assets/command-icon.png?raw=true"
-    width="50"
+    src="https://github.com/raycast/extensions/raw/main/images/store-logo.png?raw=true"
+    width="100"
   />
 
   <h1>
@@ -56,7 +56,7 @@ Find this package on the [Raycast store](https://www.raycast.com/mrmartineau/sea
 https://user-images.githubusercontent.com/64883/139598309-f47e1478-5f4e-44f6-bbea-e33a3b2f988b.mp4
 
 <h2><img
-  src="https://github.com/mrmartineau/raycast-extensions/blob/main/search-npm/assets/command-icon.png?raw=true"
+  src="https://user-images.githubusercontent.com/64883/139604791-4a3024f8-691b-4511-8915-d48eff1915c2.png?raw=true"
   width="20"
 /> GitHub Stars</h2>
 
