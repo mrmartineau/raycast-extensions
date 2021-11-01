@@ -17,6 +17,10 @@ interface PackageListItemProps {
 export const PackageListItem = ({
   result,
 }: PackageListItemProps): JSX.Element => {
+  const descriptionAsArray = result?.description
+    ? result.description.split(' ')
+    : []
+  const keywords = [result.name, ...descriptionAsArray]
   return (
     <List.Item
       id={result.node_id}
@@ -37,6 +41,7 @@ export const PackageListItem = ({
           />
         </ActionPanel>
       }
+      keywords={keywords}
     />
   )
 }
