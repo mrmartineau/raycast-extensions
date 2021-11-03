@@ -69,4 +69,6 @@ Raycast extension to search for npm packages using [npms.io](https://npms.io)
 
 - choose your preferred npm registry. `yarn` or `npm`
 
-https://user-images.githubusercontent.com/64883/139598309-f47e1478-5f4e-44f6-bbea-e33a3b2f988b.mp4
+### Screencast
+
+https://user-images.githubusercontent.com/64883/140055813-841f1850-82d6-4ca7-9482-ce2a2475937b.mp4

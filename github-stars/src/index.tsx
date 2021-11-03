@@ -50,11 +50,18 @@ export default function PackageList() {
       }
     }
 
-    fetchPackages()
+    if (githubUsername) {
+      fetchPackages()
+    } else {
+      showToast(
+        ToastStyle.Failure,
+        `Please add your GitHub username to this extension's preferences`,
+      )
+    }
   }, [])
 
   if (state?.error) {
-    showToast(ToastStyle.Failure, 'Failed loading stories', state.error.message)
+    showToast(ToastStyle.Failure, 'Failed loading stars', state.error.message)
   }
 
   return (

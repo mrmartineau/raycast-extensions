@@ -64,4 +64,4 @@ Display and filter your recent GitHub stars
 
 Find this package on the [Raycast store](https://www.raycast.com/mrmartineau/github-stars)
 
-https://user-images.githubusercontent.com/64883/139749757-0cc71b6a-182b-41ad-8890-df302331eef7.mp4
+https://user-images.githubusercontent.com/64883/140055813-841f1850-82d6-4ca7-9482-ce2a2475937b.mp4
