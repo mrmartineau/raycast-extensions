@@ -5,7 +5,7 @@
   />
 
   <h1>
-    Github Stars
+    GitHub Stars
   </h1>
 
 Raycast extension to display and filter your recent GitHub stars
