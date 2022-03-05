@@ -1,7 +1,8 @@
 {
+  "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "zmarks",
   "title": "zMarks",
-  "description": "Search and view zMarks",
+  "description": "View, search and add zMarks",
   "subtitle": "zMarks",
   "icon": "command-icon.png",
   "author": "mrmartineau",
@@ -9,21 +10,21 @@
   "commands": [
     {
       "name": "search",
-      "title": "Search zMarks",
+      "title": "Search",
       "subtitle": "zMarks",
       "description": "Search zMarks",
       "mode": "view"
     },
     {
       "name": "recent",
-      "title": "Recently added zMarks",
+      "title": "Recent",
       "subtitle": "zMarks",
       "description": "View recently added zMarks",
       "mode": "view"
     },
     {
       "name": "add",
-      "title": "Add new bookmark",
+      "title": "Add Bookmark",
       "subtitle": "zMarks",
       "description": "Add new bookmark",
       "mode": "view"
@@ -52,12 +53,11 @@
   "dependencies": {
     "@raycast/api": "^1.26.3",
     "node-fetch": "^3.0.0",
-    "parse-github-url": "^1.0.2",
-    "proper-url-join": "^2.1.1"
+    "proper-url-join": "^2.1.1",
+    "run-applescript": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "~16.10.0",
-    "@types/parse-github-url": "^1.0.0",
     "@types/proper-url-join": "^2.1.1",
     "@types/react": "^17.0.28",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
