@@ -7,7 +7,9 @@ export const fetchLatestItems = async (): Promise<Bookmark[]> => {
   const pref = getPreferenceValues()
   try {
     const response = await fetch(
-      urlJoin(pref.zMarksBasePath, 'api', 'bookmark'),
+      urlJoin(pref.zMarksBasePath, 'api', 'bookmark', {
+        query: { limit: '60' },
+      }),
       {
         headers: {
           Authorization: `Bearer ${pref.zMarksApiSecret}`,
