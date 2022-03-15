@@ -9,7 +9,10 @@ export const Item = ({
   description,
   url,
   tags,
-}: ItemProps): JSX.Element => {
+}: ItemProps): JSX.Element | null => {
+  if (!url || !title) {
+    return null
+  }
   return (
     <List.Item
       title={title}
