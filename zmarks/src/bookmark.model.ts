@@ -1,12 +1,8 @@
 export interface Bookmark {
-  title: string
-  url: string
+  title: string | null
+  url: string | null
   description: string | null
   tags: string[] | null
-  collection: {
-    title: string
-    id: string
-  } | null
   note: string | null
   star: boolean
   created_at: string
@@ -27,3 +23,4 @@ export type BookmarkType =
   | 'document'
   | 'product'
   | 'game'
+  | 'note'

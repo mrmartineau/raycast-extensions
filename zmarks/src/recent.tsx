@@ -9,22 +9,27 @@ export default function Recent() {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    const fetchItems = async (): Promise<void> => {
+    const getLocalStorageItems = async (): Promise<void> => {
       const storedItems = await LocalStorage.getItem<string>('recent-items')
-
       if (storedItems) {
         setResults(JSON.parse(storedItems) as Bookmark[])
       }
-
+    }
+    getLocalStorageItems()
+    const fetchItems = async (): Promise<void> => {
       setLoading(true)
       const response = await fetchLatestItems()
+      console.log(`🚀 ~ fetchItems ~ response`, response)
+      if (!response) {
+        setLoading(false)
+        return
+      }
       setResults(response)
       setLoading(false)
       await LocalStorage.setItem('recent-items', JSON.stringify(response))
     }
     fetchItems()
   }, [])
-
   return (
     <List isLoading={loading} searchBarPlaceholder="Filter…">
       {results?.length
