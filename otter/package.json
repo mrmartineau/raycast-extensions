@@ -1,9 +1,9 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "zmarks",
-  "title": "zMarks",
-  "description": "View, search and add zMarks",
-  "subtitle": "zMarks",
+  "name": "otter",
+  "title": "Otter",
+  "description": "View, search and add Otter",
+  "subtitle": "Otter",
   "icon": "command-icon.png",
   "author": "mrmartineau",
   "license": "MIT",
@@ -11,39 +11,39 @@
     {
       "name": "search",
       "title": "Search",
-      "subtitle": "zMarks",
-      "description": "Search zMarks",
+      "subtitle": "Otter",
+      "description": "Search Otter",
       "mode": "view"
     },
     {
       "name": "recent",
       "title": "Recent",
-      "subtitle": "zMarks",
-      "description": "View recently added zMarks",
+      "subtitle": "Otter",
+      "description": "View recently added Otter",
       "mode": "view"
     },
     {
       "name": "add",
       "title": "Add Bookmark",
-      "subtitle": "zMarks",
+      "subtitle": "Otter",
       "description": "Add new bookmark",
       "mode": "view"
     }
   ],
   "preferences": [
     {
-      "name": "zMarksBasePath",
+      "name": "otterBasePath",
       "type": "textfield",
-      "title": "zMarks API base path",
-      "description": "e.g. https://zmarks.zander.wtf",
+      "title": "Otter API base path",
+      "description": "e.g. https://otter.zander.wtf",
       "required": true,
       "default": "",
       "value": ""
     },
     {
-      "name": "zMarksApiSecret",
+      "name": "otterApiSecret",
       "type": "password",
-      "title": "zMarks API secret",
+      "title": "Otter API secret",
       "description": "This is the Supabase `service_role` API key",
       "required": true,
       "default": "",

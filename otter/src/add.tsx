@@ -31,7 +31,7 @@ export default () => {
 
   async function handleSubmit(values: { url: string }) {
     try {
-      const addUrl = urlJoin(pref.zMarksBasePath, 'new/bookmark', {
+      const addUrl = urlJoin(pref.otterBasePath, 'new/bookmark', {
         query: {
           bookmarklet: 'true',
           url: values.url,

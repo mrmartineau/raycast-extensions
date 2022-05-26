@@ -8,7 +8,7 @@ export const fetchItems = async (url: string): Promise<Bookmark[]> => {
   try {
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${pref.zMarksApiSecret}`,
+        Authorization: `Bearer ${pref.otterApiSecret}`,
       },
     })
     const json: any = await response.json()
@@ -22,7 +22,7 @@ export const fetchItems = async (url: string): Promise<Bookmark[]> => {
 export const fetchLatestItems = async (): Promise<Bookmark[]> => {
   const pref = getPreferenceValues()
   return await fetchItems(
-    urlJoin(pref.zMarksBasePath, 'api', 'bookmark', {
+    urlJoin(pref.otterBasePath, 'api', 'bookmark', {
       query: { limit: '60', status: 'active' },
     })
   )
@@ -31,7 +31,7 @@ export const fetchLatestItems = async (): Promise<Bookmark[]> => {
 export const searchItems = async (searchTerm = ''): Promise<Bookmark[]> => {
   const pref = getPreferenceValues()
   return await fetchItems(
-    urlJoin(pref.zMarksBasePath, 'api', 'search', {
+    urlJoin(pref.otterBasePath, 'api', 'search', {
       query: {
         searchTerm,
         status: 'active',

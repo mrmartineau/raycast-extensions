@@ -4,14 +4,12 @@
     width="50"
   />
 
-  <h1>
-    zMarks
-  </h1>
+  <h1>🦦<br/>Otter</h1>
 
-Raycast extension for zMarks
+Raycast extension for [Otter](https://github.com/mrmartineau/Otter)
 
   <p>
-    <a href="https://www.raycast.com/mrmartineau/zmarks">
+    <a href="https://www.raycast.com/mrmartineau/otter">
       <img src="https://img.shields.io/badge/Raycast-Store-red.svg"
         alt="Find this extension on the Raycast store"
       />

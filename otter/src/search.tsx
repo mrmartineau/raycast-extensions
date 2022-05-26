@@ -18,7 +18,7 @@ export default function Search() {
   return (
     <List
       isLoading={loading}
-      searchBarPlaceholder={`Search zMarks, like "wordle"…`}
+      searchBarPlaceholder={`Search Otter, like "wordle"…`}
       onSearchTextChange={onSearchTextChange}
       throttle
     >
