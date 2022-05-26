@@ -34,7 +34,7 @@
     {
       "name": "otterBasePath",
       "type": "textfield",
-      "title": "Otter API base path",
+      "title": "Otter instance url",
       "description": "e.g. https://otter.zander.wtf",
       "required": true,
       "default": "",

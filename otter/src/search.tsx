@@ -24,7 +24,7 @@ export default function Search() {
     >
       {results?.length
         ? results.map(({ key, ...rest }: Bookmark) => {
-            return <Item key={key} {...rest} />
+            return <Item key={key} {...rest} id={key} />
           })
         : null}
     </List>

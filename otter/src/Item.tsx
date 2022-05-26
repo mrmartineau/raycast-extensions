@@ -1,9 +1,19 @@
-import { List, ActionPanel, Action, Icon, Detail } from '@raycast/api'
+import {
+  List,
+  ActionPanel,
+  Action,
+  Icon,
+  Detail,
+  getPreferenceValues,
+} from '@raycast/api'
+import urlJoin from 'proper-url-join'
 import tinyRelativeDate from 'tiny-relative-date'
 import { Bookmark } from './bookmark.model'
 import { simpleUrl } from './utils/simpleUrl'
 
-interface ItemProps extends Bookmark {}
+interface ItemProps extends Bookmark {
+  id: string
+}
 
 export const Item = ({
   title,
@@ -12,7 +22,10 @@ export const Item = ({
   tags,
   created_at,
   note,
+  id,
 }: ItemProps): JSX.Element | null => {
+  const pref = getPreferenceValues()
+
   if (!url || !title) {
     return null
   }
@@ -33,6 +46,12 @@ export const Item = ({
       tooltip: `Tags: ${tags?.join(', ')}`,
     })
   }
+  if (note) {
+    accessories.push({
+      icon: Icon.TextDocument,
+      tooltip: note,
+    })
+  }
 
   return (
     <List.Item
@@ -44,6 +63,11 @@ export const Item = ({
       actions={
         <ActionPanel>
           <Action.OpenInBrowser url={url} title="Open url" />
+          <Action.CopyToClipboard title="Copy url" content={url} />
+          <Action.OpenInBrowser
+            url={urlJoin(pref.otterBasePath, 'bookmark', id)}
+            title="Open item in Otter"
+          />
           {description ? (
             <Action.Push
               title="View Description"
