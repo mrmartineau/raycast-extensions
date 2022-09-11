@@ -5,14 +5,45 @@ import {
   Icon,
   Detail,
   getPreferenceValues,
+  Image,
 } from '@raycast/api'
 import urlJoin from 'proper-url-join'
 import tinyRelativeDate from 'tiny-relative-date'
 import { Bookmark } from './bookmark.model'
 import { simpleUrl } from './utils/simpleUrl'
+import formatTitle from 'title'
 
 interface ItemProps extends Bookmark {
   id: string
+}
+
+const typeToIcon = (type: string) => {
+  switch (type) {
+    case 'article':
+      return Icon.Document
+    case 'video':
+      return Icon.Video
+    case 'audio':
+      return Icon.Music
+    case 'image':
+      return Icon.Image
+    case 'recipe':
+      return Icon.Leaf
+    case 'document':
+      return Icon.Document
+    case 'product':
+      return Icon.Car
+    case 'game':
+      return Icon.GameController
+    case 'link':
+      return Icon.Link
+    case 'note':
+      return Icon.Snippets
+    case 'event':
+      return Icon.Clock
+    default:
+      return null
+  }
 }
 
 export const Item = ({
@@ -23,6 +54,7 @@ export const Item = ({
   created_at,
   note,
   id,
+  type,
 }: ItemProps): JSX.Element | null => {
   const pref = getPreferenceValues()
 
@@ -39,16 +71,20 @@ export const Item = ({
       icon: Icon.Calendar,
       tooltip: `Added: ${tinyRelativeDate(new Date(created_at))}`,
     },
+    {
+      icon: typeToIcon(type),
+      tooltip: formatTitle(type),
+    },
   ]
   if (tags?.length) {
     accessories.push({
-      icon: Icon.Pin,
+      icon: Icon.Hashtag,
       tooltip: `Tags: ${tags?.join(', ')}`,
     })
   }
   if (note) {
     accessories.push({
-      icon: Icon.TextDocument,
+      icon: Icon.Snippets,
       tooltip: note,
     })
   }
@@ -57,7 +93,10 @@ export const Item = ({
     <List.Item
       title={title}
       subtitle={description || ''}
-      icon={`https://icons.duckduckgo.com/ip3/${simpleUrl(url)}.ico`}
+      icon={{
+        source: `https://icons.duckduckgo.com/ip3/${simpleUrl(url)}.ico`,
+        mask: Image.Mask.Circle,
+      }}
       accessories={accessories}
       keywords={tags ?? []}
       actions={
@@ -72,14 +111,14 @@ export const Item = ({
             <Action.Push
               title="View Description"
               target={<Detail markdown={description} />}
-              icon={Icon.TextDocument}
+              icon={Icon.Document}
             />
           ) : null}
           {note ? (
             <Action.Push
               title="View Note"
               target={<Detail markdown={note} />}
-              icon={Icon.TextDocument}
+              icon={Icon.Snippets}
             />
           ) : null}
         </ActionPanel>

@@ -1,29 +1,23 @@
 import { List } from '@raycast/api'
 import { useState } from 'react'
-import { searchItems } from './utils/fetchItems'
 import { Item } from './Item'
 import { Bookmark } from './bookmark.model'
+import { useFetchSearchItems } from './utils/fetchItems'
 
 export default function Search() {
-  const [results, setResults] = useState<Bookmark[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
-
-  const onSearchTextChange = async (text: string) => {
-    setLoading(true)
-    const response = await searchItems(text.replace(/\s/g, '+'))
-    setResults(response)
-    setLoading(false)
-  }
+  const [searchTerm, setSearchTerm] = useState('')
+  const { isLoading, data } = useFetchSearchItems(searchTerm)
 
   return (
     <List
-      isLoading={loading}
+      isLoading={isLoading}
+      searchText={searchTerm}
       searchBarPlaceholder={`Search Otter, like "wordle"…`}
-      onSearchTextChange={onSearchTextChange}
+      onSearchTextChange={setSearchTerm}
       throttle
     >
-      {results?.length
-        ? results.map(({ key, ...rest }: Bookmark) => {
+      {data?.data.length
+        ? data?.data.map(({ key, ...rest }: Bookmark) => {
             return <Item key={key} {...rest} id={key} />
           })
         : null}

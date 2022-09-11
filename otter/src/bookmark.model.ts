@@ -1,3 +1,14 @@
+export type ApiResponse = {
+  offset: number
+  limit: number
+  count: number
+  _links: {
+    next: string | null
+    prev: string | null
+  }
+  data: Bookmark[]
+}
+
 export interface Bookmark {
   title: string | null
   url: string | null
@@ -11,6 +22,18 @@ export interface Bookmark {
   click_count: number
   type: BookmarkType
   image: string
+  excerpt: string | null
+  tweet?: {
+    text: string
+    username: string
+    url: string
+  }
+  feeds:
+    | {
+        title: string
+        url: string
+      }[]
+    | null
 }
 
 export type BookmarkType =
@@ -24,3 +47,5 @@ export type BookmarkType =
   | 'product'
   | 'game'
   | 'note'
+  | 'event'
+  | 'file'
