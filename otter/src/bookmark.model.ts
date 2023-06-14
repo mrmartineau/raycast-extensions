@@ -18,7 +18,7 @@ export interface Bookmark {
   star: boolean
   created_at: string
   modified_at: string
-  key: string
+  id: string
   click_count: number
   type: BookmarkType
   image: string
@@ -28,12 +28,7 @@ export interface Bookmark {
     username: string
     url: string
   }
-  feeds:
-    | {
-        title: string
-        url: string
-      }[]
-    | null
+  feed: string | null
 }
 
 export type BookmarkType =

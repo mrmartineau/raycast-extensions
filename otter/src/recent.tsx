@@ -9,8 +9,8 @@ export default function Recent() {
   return (
     <List isLoading={isLoading} searchBarPlaceholder="Filter…">
       {data?.data.length
-        ? data?.data.map(({ key, ...rest }: Bookmark) => {
-            return <Item key={key} {...rest} id={key} />
+        ? data?.data.map((item: Bookmark) => {
+            return <Item key={item.id} {...item} />
           })
         : null}
     </List>

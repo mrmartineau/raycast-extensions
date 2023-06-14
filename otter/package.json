@@ -20,7 +20,8 @@
       "title": "Recent",
       "subtitle": "Otter",
       "description": "View recently added Otter",
-      "mode": "view"
+      "mode": "view",
+      "interval": "10m"
     },
     {
       "name": "add",

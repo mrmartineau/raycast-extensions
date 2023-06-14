@@ -94,7 +94,7 @@ export const Item = ({
       title={title}
       subtitle={description || ''}
       icon={{
-        source: `https://icons.duckduckgo.com/ip3/${simpleUrl(url)}.ico`,
+        source: `https://logo.clearbit.com/${simpleUrl(url)}`,
         mask: Image.Mask.Circle,
       }}
       accessories={accessories}
