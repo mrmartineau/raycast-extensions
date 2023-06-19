@@ -42,8 +42,6 @@ Various Raycast extensions
   </p>
 </div>
 
-# Raycast extensions
-
 <h2><img
   src="https://github.com/mrmartineau/raycast-extensions/blob/main/search-npm/assets/command-icon.png?raw=true"
   width="20"
@@ -65,3 +63,15 @@ Display and filter your recent GitHub stars
 Find this package on the [Raycast store](https://www.raycast.com/mrmartineau/github-stars)
 
 https://user-images.githubusercontent.com/64883/140055813-841f1850-82d6-4ca7-9482-ce2a2475937b.mp4
+
+## Otter search
+
+This uses the APIs I developed for my [Otter](https://otter.zander.wtf/) bookmarking side-project to search bookmarks.
+
+This is not in the Raycast store.
+
+## Code Notes search
+
+This uses the Algolia search API to search through my [Code Notes](https://notes.zander.wtf/) site.
+
+This is not in the Raycast store.
