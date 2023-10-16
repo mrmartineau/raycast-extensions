@@ -10,25 +10,27 @@ export type ApiResponse = {
 }
 
 export interface Bookmark {
-  title: string | null
-  url: string | null
+  click_count: number
+  created_at: string
   description: string | null
-  tags: string[] | null
+  feed: string | null
+  id: string
+  image: string | null
+  modified_at: string
   note: string | null
   star: boolean
-  created_at: string
-  modified_at: string
-  id: string
-  click_count: number
+  status: BookmarkStatus
+  tags: string[] | null
+  title: string | null
   type: BookmarkType
-  image: string
-  excerpt: string | null
+  url: string | null
+  user: string | null
+
   tweet?: {
     text: string
     username: string
     url: string
   }
-  feed: string | null
 }
 
 export type BookmarkType =
@@ -43,4 +45,19 @@ export type BookmarkType =
   | 'game'
   | 'note'
   | 'event'
+  | 'file'
+
+export type BookmarkStatus =
+  | 'link'
+  | 'video'
+  | 'audio'
+  | 'recipe'
+  | 'image'
+  | 'document'
+  | 'article'
+  | 'game'
+  | 'book'
+  | 'event'
+  | 'product'
+  | 'note'
   | 'file'

@@ -20,7 +20,7 @@ export const useFetchSearchItems = (searchTerm: string = '') => {
   return useOtterFetch<ApiResponse>(
     urlJoin(pref.otterBasePath, 'api', 'search', {
       query: {
-        searchTerm,
+        q: searchTerm,
         status: 'active',
       },
     })
@@ -29,7 +29,7 @@ export const useFetchSearchItems = (searchTerm: string = '') => {
 export const useFetchRecentItems = () => {
   const pref = getPreferenceValues()
   return useOtterFetch<ApiResponse>(
-    urlJoin(pref.otterBasePath, 'api', 'bookmark', {
+    urlJoin(pref.otterBasePath, 'api', 'bookmarks', {
       query: { limit: '60', status: 'active' },
     })
   )

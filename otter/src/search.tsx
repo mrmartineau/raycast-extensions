@@ -1,12 +1,20 @@
-import { Action, ActionPanel, Icon, List } from '@raycast/api'
+import {
+  Action,
+  ActionPanel,
+  Icon,
+  List,
+  getPreferenceValues,
+} from '@raycast/api'
 import { useState } from 'react'
 import { Item } from './Item'
 import { Bookmark } from './bookmark.model'
 import { useFetchSearchItems } from './utils/fetchItems'
+import urlJoin from 'proper-url-join'
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')
   const { isLoading, data } = useFetchSearchItems(searchTerm)
+  const pref = getPreferenceValues()
 
   return (
     <List
@@ -23,7 +31,9 @@ export default function Search() {
           actions={
             <ActionPanel>
               <Action.OpenInBrowser
-                url={`https://otter.zander.wtf/search?searchTerm=${searchTerm}`}
+                url={urlJoin(pref.otterBasePath, 'search', {
+                  query: { q: searchTerm },
+                })}
                 title="Open search in Otter"
               />
             </ActionPanel>
@@ -43,7 +53,7 @@ export default function Search() {
           }
         />
       )}
-      {data?.data.length
+      {data?.data?.length
         ? data?.data.map((item: Bookmark) => {
             return <Item key={item.id} {...item} />
           })

@@ -55,7 +55,7 @@ export const Item = ({
   note,
   id,
   type,
-}: ItemProps): JSX.Element | null => {
+}: ItemProps) => {
   const pref = getPreferenceValues()
 
   if (!url || !title) {
