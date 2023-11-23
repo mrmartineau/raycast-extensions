@@ -9,12 +9,14 @@ import {
 } from '@raycast/api'
 import { useEffect, useMemo, useState } from 'react'
 import algoliasearch from 'algoliasearch/lite'
+import { Note } from './note'
 
-interface SearchResult {
+export interface SearchResult {
   title: string
   emoji: string
   date: string
   url: string
+  content: string
   tags: string[]
 }
 
@@ -39,7 +41,14 @@ export default function main() {
 
     return await algoliaIndex
       .search<SearchResult>(query, {
-        attributesToRetrieve: ['title', 'url', 'date', 'tags', 'emoji'],
+        attributesToRetrieve: [
+          'title',
+          'url',
+          'date',
+          'tags',
+          'emoji',
+          'content',
+        ],
         attributesToHighlight: [],
       })
       .then((res) => {
@@ -78,10 +87,12 @@ export default function main() {
           icon={result.emoji}
           title={result.title}
           accessories={[
-            {
-              icon: Icon.Hashtag,
-              text: result.tags?.join(', '),
-            },
+            result.tags?.length
+              ? {
+                  icon: Icon.Hashtag,
+                  text: result.tags?.join(', '),
+                }
+              : {},
             {
               icon: Icon.Calendar,
               text: new Intl.DateTimeFormat('en-GB', {
@@ -91,6 +102,13 @@ export default function main() {
           ]}
           actions={
             <ActionPanel>
+              {result.content ? (
+                <Action.Push
+                  title="View Note"
+                  target={<Note {...result} />}
+                  icon={Icon.Paragraph}
+                />
+              ) : null}
               <Action.OpenInBrowser
                 url={`${preferences.baseUrl}${result.url}`}
                 title="Open in Browser"
