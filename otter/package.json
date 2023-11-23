@@ -42,10 +42,19 @@
       "value": ""
     },
     {
-      "name": "otterApiSecret",
+      "name": "otterOAuthClientId",
       "type": "password",
-      "title": "Otter API secret",
-      "description": "This is the Supabase `service_role` API key",
+      "title": "Otter OAuth Client ID",
+      "description": "Otter OAuth Client ID",
+      "required": true,
+      "default": "",
+      "value": ""
+    },
+    {
+      "name": "otterOAuthClientSecret",
+      "type": "password",
+      "title": "Otter OAuth Client Secret",
+      "description": "Otter OAuth Client Secret",
       "required": true,
       "default": "",
       "value": ""
