@@ -46,7 +46,7 @@ export default function Search() {
           actions={
             <ActionPanel>
               <Action.OpenInBrowser
-                url={`https://otter.zander.wtf`}
+                url={`https://otter.zander.wtf/feed`}
                 title="Open latest items in Otter"
               />
             </ActionPanel>
