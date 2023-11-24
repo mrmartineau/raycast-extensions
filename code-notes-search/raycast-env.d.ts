@@ -15,14 +15,14 @@ declare type Preferences = ExtensionPreferences
 declare namespace Preferences {
   /** Preferences accessible in the `index` command */
   export type Index = ExtensionPreferences & {
-  /** Application ID - You can find your Application ID from the Algolia Dashboard. */
-  "appId": string,
-  /** Index Name - Specify the Algolia Index you want to search on. */
-  "indexName": string,
-  /** Search API Key - You can find your Search API Key from the Algolia Dashboard. */
-  "apiKey": string,
   /** URL for your code notes site - This will prefix the `url` attribute of your records. */
-  "baseUrl": string
+  "baseUrl": string,
+  /** Algolia Application ID - You can find your Application ID from the Algolia Dashboard. */
+  "appId": string,
+  /** Algolia Index Name - Specify the Algolia Index you want to search on. */
+  "indexName": string,
+  /** Algolia Search API Key - You can find your Search API Key from the Algolia Dashboard. */
+  "apiKey": string
 }
 }
 

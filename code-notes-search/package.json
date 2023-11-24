@@ -14,32 +14,32 @@
       "mode": "view",
       "preferences": [
         {
+          "name": "baseUrl",
+          "type": "textfield",
+          "required": true,
+          "title": "URL for your code notes site",
+          "description": "This will prefix the `url` attribute of your records."
+        },
+        {
           "name": "appId",
           "type": "textfield",
           "required": true,
-          "title": "Application ID",
+          "title": "Algolia Application ID",
           "description": "You can find your Application ID from the Algolia Dashboard."
         },
         {
           "name": "indexName",
           "type": "textfield",
           "required": true,
-          "title": "Index Name",
+          "title": "Algolia Index Name",
           "description": "Specify the Algolia Index you want to search on."
         },
         {
           "name": "apiKey",
           "type": "password",
           "required": true,
-          "title": "Search API Key",
+          "title": "Algolia Search API Key",
           "description": "You can find your Search API Key from the Algolia Dashboard."
-        },
-        {
-          "name": "baseUrl",
-          "type": "textfield",
-          "required": true,
-          "title": "URL for your code notes site",
-          "description": "This will prefix the `url` attribute of your records."
         }
       ]
     }

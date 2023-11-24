@@ -33,7 +33,10 @@ export const Note = ({
             url={`${preferences.baseUrl}${url}`}
             title="Open in Browser"
           />
-          <Action.CopyToClipboard title="Copy URL" content={url} />
+          <Action.CopyToClipboard
+            title="Copy URL"
+            content={`${preferences.baseUrl}${url}`}
+          />
         </ActionPanel>
       }
     />

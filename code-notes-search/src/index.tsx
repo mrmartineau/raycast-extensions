@@ -113,7 +113,10 @@ export default function main() {
                 url={`${preferences.baseUrl}${result.url}`}
                 title="Open in Browser"
               />
-              <Action.CopyToClipboard title="Copy URL" content={result.url} />
+              <Action.CopyToClipboard
+                title="Copy URL"
+                content={`${preferences.baseUrl}${result.url}`}
+              />
             </ActionPanel>
           }
         />
