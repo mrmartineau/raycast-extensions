@@ -5,14 +5,20 @@ import {
   List,
   getPreferenceValues,
 } from '@raycast/api'
-import { useFetchRecentItems } from './utils/fetchItems'
 import { Item } from './Item'
-import { Bookmark } from './bookmark.model'
 import urlJoin from 'proper-url-join'
+import { useAuth } from './use-auth'
+import { useRecents } from './useRecents'
+import { Unauthorised } from './unauthorised'
 
 export default function Recent() {
-  const { isLoading, data } = useFetchRecentItems()
-  const pref = getPreferenceValues()
+  const authError = useAuth()
+  const { bookmarks, isLoading } = useRecents()
+  const prefs = getPreferenceValues()
+
+  if (authError) {
+    return <Unauthorised authError={authError} />
+  }
 
   return (
     <List isLoading={isLoading} searchBarPlaceholder="Filter…">
@@ -22,14 +28,14 @@ export default function Recent() {
         actions={
           <ActionPanel>
             <Action.OpenInBrowser
-              url={urlJoin(pref.otterBasePath, 'feed')}
+              url={urlJoin(prefs.otterBasePath, 'feed')}
               title="Open recent items in Otter"
             />
           </ActionPanel>
         }
       />
-      {data?.data?.length
-        ? data?.data.map((item: Bookmark) => {
+      {bookmarks?.length
+        ? bookmarks.map((item) => {
             return <Item key={item.id} {...item} />
           })
         : null}
