@@ -1,36 +1,21 @@
-import { getPreferenceValues } from '@raycast/api'
-import { ApiResponse } from '../bookmark.model'
-import urlJoin from 'proper-url-join'
-import { useFetch } from '@raycast/utils'
-
-export const useOtterFetch = <T = unknown, U = undefined>(url: string) => {
-  const pref = getPreferenceValues()
-  const fetchResponse = useFetch<ApiResponse>(url, {
-    headers: {
-      Authorization: `Bearer ${pref.otterApiSecret}`,
-    },
-    keepPreviousData: true,
-  })
-
-  return fetchResponse
-}
+import { supabase } from '../supabase'
 
 export const useFetchSearchItems = (searchTerm: string = '') => {
-  const pref = getPreferenceValues()
-  return useOtterFetch<ApiResponse>(
-    urlJoin(pref.otterBasePath, 'api', 'search', {
-      query: {
-        q: searchTerm,
-        status: 'active',
-      },
-    })
-  )
+  return supabase
+    .from('bookmarks')
+    .select('*', { count: 'exact' })
+    .or(
+      `title.ilike.*${searchTerm}*,url.ilike.*${searchTerm}*,description.ilike.*${searchTerm}*,note.ilike.*${searchTerm}*,tags.cs.{${searchTerm}}`
+    )
+    .match({ status: 'active' })
+    .order('created_at', { ascending: false })
 }
+
 export const useFetchRecentItems = () => {
-  const pref = getPreferenceValues()
-  return useOtterFetch<ApiResponse>(
-    urlJoin(pref.otterBasePath, 'api', 'bookmarks', {
-      query: { limit: '60', status: 'active' },
-    })
-  )
+  return supabase
+    .from('bookmarks')
+    .select('*', { count: 'exact' })
+    .limit(60)
+    .match({ status: 'active' })
+    .order('created_at', { ascending: false })
 }

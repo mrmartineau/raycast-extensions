@@ -9,15 +9,15 @@ import {
 } from '@raycast/api'
 import urlJoin from 'proper-url-join'
 import tinyRelativeDate from 'tiny-relative-date'
-import { Bookmark } from './bookmark.model'
 import { simpleUrl } from './utils/simpleUrl'
 import formatTitle from 'title'
+import { BaseBookmark } from './types'
 
-interface ItemProps extends Bookmark {
+interface ItemProps extends BaseBookmark {
   id: string
 }
 
-const typeToIcon = (type: string) => {
+const typeToIcon = (type: string | null) => {
   switch (type) {
     case 'article':
       return Icon.Document
@@ -55,6 +55,8 @@ export const Item = ({
   note,
   id,
   type,
+  star,
+  public: isPublic,
 }: ItemProps) => {
   const pref = getPreferenceValues()
 
@@ -63,10 +65,6 @@ export const Item = ({
   }
 
   const accessories = [
-    {
-      text: simpleUrl(url),
-      tooltip: url,
-    },
     {
       icon: Icon.Calendar,
       tooltip: `Added: ${tinyRelativeDate(new Date(created_at))}`,
@@ -88,6 +86,18 @@ export const Item = ({
       tooltip: note,
     })
   }
+  if (star) {
+    accessories.push({
+      icon: Icon.StarCircle,
+      tooltip: 'Starred',
+    })
+  }
+  if (isPublic) {
+    accessories.push({
+      icon: Icon.Eye,
+      tooltip: 'Public',
+    })
+  }
 
   return (
     <List.Item
@@ -96,17 +106,18 @@ export const Item = ({
       icon={{
         source: `https://logo.clearbit.com/${simpleUrl(url)}`,
         mask: Image.Mask.Circle,
+        tooltip: url,
       }}
       accessories={accessories}
       keywords={tags ?? []}
       actions={
         <ActionPanel>
           <Action.OpenInBrowser url={url} title="Open url" />
-          <Action.CopyToClipboard title="Copy url" content={url} />
           <Action.OpenInBrowser
             url={urlJoin(pref.otterBasePath, 'bookmark', id)}
             title="Open item in Otter"
           />
+          <Action.CopyToClipboard title="Copy url" content={url} />
           {description ? (
             <Action.Push
               title="View Description"

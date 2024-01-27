@@ -33,27 +33,50 @@
   ],
   "preferences": [
     {
+      "name": "loginEmail",
+      "type": "textfield",
+      "required": true,
+      "title": "Email",
+      "description": "Your email on otter.zander.wtf",
+      "placeholder": "joe@doe.com"
+    },
+    {
+      "name": "loginPassword",
+      "type": "password",
+      "required": true,
+      "title": "Password",
+      "description": "Your password on otter.zander.wtf",
+      "placeholder": "********"
+    },
+    {
       "name": "otterBasePath",
       "type": "textfield",
       "title": "Otter instance url",
       "description": "e.g. https://otter.zander.wtf",
       "required": true,
-      "default": "",
-      "value": ""
+      "default": "https://otter.zander.wtf"
     },
     {
-      "name": "otterApiSecret",
-      "type": "password",
-      "title": "Otter API secret",
-      "description": "This is the Supabase `service_role` API key",
+      "name": "supabaseUrl",
+      "type": "textfield",
+      "title": "Supabase project url",
+      "description": "Find this in your Supabase project API settings. e.g. https://ffpbylcvwtyozyrplqic.supabase.co",
       "required": true,
-      "default": "",
-      "value": ""
+      "default": ""
+    },
+    {
+      "name": "supabaseAnonKey",
+      "type": "textfield",
+      "title": "Supabase Anon API Key",
+      "description": "Find this in your Supabase project API settings",
+      "required": true,
+      "default": ""
     }
   ],
   "dependencies": {
     "@raycast/api": "^1.59.0",
     "@raycast/utils": "^1.10.0",
+    "@supabase/supabase-js": "^2.39.2",
     "node-fetch": "^3.3.2",
     "proper-url-join": "^2.1.1",
     "run-applescript": "^6.1.0",
