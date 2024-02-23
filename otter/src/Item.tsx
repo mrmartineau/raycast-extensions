@@ -11,13 +11,9 @@ import urlJoin from 'proper-url-join'
 import tinyRelativeDate from 'tiny-relative-date'
 import { simpleUrl } from './utils/simpleUrl'
 import formatTitle from 'title'
-import { BaseBookmark } from './types'
+import { BaseBookmark, type BookmarkType } from './types'
 
-interface ItemProps extends BaseBookmark {
-  id: string
-}
-
-const typeToIcon = (type: string | null) => {
+const typeToIcon = (type: BookmarkType | null) => {
   switch (type) {
     case 'article':
       return Icon.Document
@@ -41,6 +37,10 @@ const typeToIcon = (type: string | null) => {
       return Icon.Snippets
     case 'event':
       return Icon.Clock
+    case 'place':
+      return Icon.Pin
+    case 'book':
+      return Icon.Book
     default:
       return null
   }
@@ -57,7 +57,7 @@ export const Item = ({
   type,
   star,
   public: isPublic,
-}: ItemProps) => {
+}: BaseBookmark) => {
   const pref = getPreferenceValues()
 
   if (!url || !title) {

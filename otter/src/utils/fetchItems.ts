@@ -1,4 +1,5 @@
 import { supabase } from '../supabase'
+import type { BaseBookmark } from '../types'
 
 export const useFetchSearchItems = (searchTerm: string = '') => {
   return supabase
@@ -9,6 +10,7 @@ export const useFetchSearchItems = (searchTerm: string = '') => {
     )
     .match({ status: 'active' })
     .order('created_at', { ascending: false })
+    .returns<BaseBookmark[]>()
 }
 
 export const useFetchRecentItems = () => {
@@ -18,4 +20,5 @@ export const useFetchRecentItems = () => {
     .limit(60)
     .match({ status: 'active' })
     .order('created_at', { ascending: false })
+    .returns<BaseBookmark[]>()
 }

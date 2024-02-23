@@ -7,18 +7,12 @@ import {
 } from '@raycast/api'
 import { Item } from './Item'
 import urlJoin from 'proper-url-join'
-import { useAuth } from './use-auth'
 import { useRecents } from './useRecents'
-import { Unauthorised } from './unauthorised'
+import { Authenticated } from './authenticated'
 
-export default function Recent() {
-  const authError = useAuth()
-  const { bookmarks, isLoading } = useRecents()
+export const RecentBookmarks = () => {
+  const { data: bookmarks, isLoading } = useRecents()
   const prefs = getPreferenceValues()
-
-  if (authError) {
-    return <Unauthorised authError={authError} />
-  }
 
   return (
     <List isLoading={isLoading} searchBarPlaceholder="Filter…">
@@ -41,4 +35,8 @@ export default function Recent() {
         : null}
     </List>
   )
+}
+
+export default function Command() {
+  return <Authenticated component={RecentBookmarks} />
 }

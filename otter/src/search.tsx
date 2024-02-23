@@ -7,24 +7,18 @@ import {
 } from '@raycast/api'
 import { useState } from 'react'
 import urlJoin from 'proper-url-join'
-import { useAuth } from './use-auth'
 import { useSearch } from './useSearch'
 import { useRecents } from './useRecents'
 import { Item } from './Item'
-import { Unauthorised } from './unauthorised'
+import { Authenticated } from './authenticated'
 
-export default function Search() {
+const prefs = getPreferenceValues()
+
+const SearchBookmarks = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const authError = useAuth()
-  const { bookmarks: recentBookmarks, isLoading: recentIsLoading } =
-    useRecents()
-  const { bookmarks, isLoading } = useSearch(searchTerm)
+  const { data: recentBookmarks, isLoading: recentIsLoading } = useRecents()
+  const { data: bookmarks, isLoading } = useSearch(searchTerm)
   const bookmarksLoading = recentIsLoading || isLoading
-  const prefs = getPreferenceValues()
-
-  if (authError) {
-    return <Unauthorised authError={authError} />
-  }
 
   return (
     <List
@@ -52,6 +46,7 @@ export default function Search() {
           />
           {bookmarks?.length
             ? bookmarks.map((item) => {
+                console.log(`🚀 ~ ?bookmarks.map ~ item:`, item)
                 return <Item key={item.id} {...item} />
               })
             : null}
@@ -64,7 +59,7 @@ export default function Search() {
             actions={
               <ActionPanel>
                 <Action.OpenInBrowser
-                  url={`https://otter.zander.wtf/feed`}
+                  url={urlJoin(prefs.otterBasePath, 'feed')}
                   title="Open latest items in Otter"
                 />
               </ActionPanel>
@@ -72,6 +67,7 @@ export default function Search() {
           />
           {recentBookmarks?.length
             ? recentBookmarks.map((item) => {
+                console.log(`🚀 ~ ?recentBookmarks.map ~ item:`, item)
                 return <Item key={item.id} {...item} />
               })
             : null}
@@ -79,4 +75,8 @@ export default function Search() {
       )}
     </List>
   )
+}
+
+export default function Command() {
+  return <Authenticated component={SearchBookmarks} />
 }
