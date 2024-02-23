@@ -46,7 +46,6 @@ const SearchBookmarks = () => {
           />
           {bookmarks?.length
             ? bookmarks.map((item) => {
-                console.log(`🚀 ~ ?bookmarks.map ~ item:`, item)
                 return <Item key={item.id} {...item} />
               })
             : null}
@@ -67,7 +66,6 @@ const SearchBookmarks = () => {
           />
           {recentBookmarks?.length
             ? recentBookmarks.map((item) => {
-                console.log(`🚀 ~ ?recentBookmarks.map ~ item:`, item)
                 return <Item key={item.id} {...item} />
               })
             : null}

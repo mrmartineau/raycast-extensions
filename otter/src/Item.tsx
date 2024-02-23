@@ -98,6 +98,18 @@ export const Item = ({
       tooltip: 'Public',
     })
   }
+  if (star) {
+    accessories.push({
+      icon: Icon.StarCircle,
+      tooltip: 'Starred',
+    })
+  }
+  if (isPublic) {
+    accessories.push({
+      icon: Icon.Eye,
+      tooltip: 'Public',
+    })
+  }
 
   return (
     <List.Item
@@ -117,6 +129,7 @@ export const Item = ({
             url={urlJoin(pref.otterBasePath, 'bookmark', id)}
             title="Open item in Otter"
           />
+          <Action.CopyToClipboard title="Copy url" content={url} />
           <Action.CopyToClipboard title="Copy url" content={url} />
           {description ? (
             <Action.Push

@@ -22,7 +22,6 @@ export async function authorize() {
   const rawSession = await LocalStorage.getItem('session')
   const session = rawSession ? JSON.parse(String(rawSession)) : null
   const { loginEmail: email, loginPassword: password } = prefs
-  console.log(`🚀 ~ authorize ~ prefs:`, prefs)
 
   if (session && email === session.user?.email) {
     const { data, error } = await supabase.auth.setSession(session)
