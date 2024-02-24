@@ -46,7 +46,11 @@ const typeToIcon = (type: BookmarkType | null) => {
   }
 }
 
-export const Item = ({
+type LinkItemProps = BaseBookmark
+
+const prefs = getPreferenceValues()
+const showDetail = prefs.showDetailView
+export const LinkItem = ({
   title,
   description,
   url,
@@ -57,9 +61,9 @@ export const Item = ({
   type,
   star,
   public: isPublic,
-}: BaseBookmark) => {
-  const pref = getPreferenceValues()
-
+  image,
+  modified_at,
+}: LinkItemProps) => {
   if (!url || !title) {
     return null
   }
@@ -98,43 +102,32 @@ export const Item = ({
       tooltip: 'Public',
     })
   }
-  if (star) {
-    accessories.push({
-      icon: Icon.StarCircle,
-      tooltip: 'Starred',
-    })
-  }
-  if (isPublic) {
-    accessories.push({
-      icon: Icon.Eye,
-      tooltip: 'Public',
-    })
-  }
+
+  const descriptionDetail = `![](${image})\n\n${description}`
 
   return (
     <List.Item
       title={title}
-      subtitle={description || ''}
+      subtitle={!showDetail ? description || '' : ''}
       icon={{
         source: `https://logo.clearbit.com/${simpleUrl(url)}`,
         mask: Image.Mask.Circle,
-        tooltip: url,
+        fallback: Icon.Bookmark,
       }}
-      accessories={accessories}
+      accessories={showDetail ? null : accessories}
       keywords={tags ?? []}
       actions={
         <ActionPanel>
           <Action.OpenInBrowser url={url} title="Open url" />
           <Action.OpenInBrowser
-            url={urlJoin(pref.otterBasePath, 'bookmark', id)}
+            url={urlJoin(prefs.otterBasePath, 'bookmark', id)}
             title="Open item in Otter"
           />
-          <Action.CopyToClipboard title="Copy url" content={url} />
           <Action.CopyToClipboard title="Copy url" content={url} />
           {description ? (
             <Action.Push
               title="View Description"
-              target={<Detail markdown={description} />}
+              target={<Detail markdown={descriptionDetail} />}
               icon={Icon.Document}
             />
           ) : null}
@@ -146,6 +139,55 @@ export const Item = ({
             />
           ) : null}
         </ActionPanel>
+      }
+      detail={
+        <List.Item.Detail
+          markdown={description}
+          metadata={
+            <List.Item.Detail.Metadata>
+              {/* <List.Item.Detail.Metadata.Label title="Title" text={title} /> */}
+              {tags?.length ? (
+                <List.Item.Detail.Metadata.TagList title="Tags">
+                  {tags?.map((tag) => (
+                    <List.Item.Detail.Metadata.TagList.Item
+                      text={tag}
+                      icon={Icon.Hashtag}
+                    />
+                  ))}
+                </List.Item.Detail.Metadata.TagList>
+              ) : null}
+              <List.Item.Detail.Metadata.Label
+                title="Type"
+                text={formatTitle(type)}
+                icon={typeToIcon(type)}
+              />
+              <List.Item.Detail.Metadata.Label
+                title="Date added"
+                text={tinyRelativeDate(new Date(created_at))}
+                icon={Icon.Calendar}
+              />
+              {modified_at !== created_at ? (
+                <List.Item.Detail.Metadata.Label
+                  title="Date modified"
+                  text={tinyRelativeDate(new Date(modified_at))}
+                  icon={Icon.Calendar}
+                />
+              ) : null}
+              {star ? (
+                <List.Item.Detail.Metadata.Label
+                  title="Starred"
+                  icon={Icon.Star}
+                />
+              ) : null}
+              {isPublic ? (
+                <List.Item.Detail.Metadata.Label
+                  title="Public"
+                  icon={Icon.Eye}
+                />
+              ) : null}
+            </List.Item.Detail.Metadata>
+          }
+        />
       }
     />
   )

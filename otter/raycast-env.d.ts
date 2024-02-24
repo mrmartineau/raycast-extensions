@@ -17,7 +17,9 @@ type ExtensionPreferences = {
   /** Supabase project url - Find this in your Supabase project API settings. e.g. https://ffpbylcvwtyozyrplqic.supabase.co */
   "supabaseUrl": string,
   /** Supabase Anon API Key - Find this in your Supabase project API settings */
-  "supabaseAnonKey": string
+  "supabaseAnonKey": string,
+  /** Show detail view to side or list view - Show detail view to side or list view */
+  "showDetailView": boolean
 }
 
 /** Preferences accessible in all the extension's commands */

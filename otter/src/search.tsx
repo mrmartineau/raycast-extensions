@@ -9,7 +9,7 @@ import { useState } from 'react'
 import urlJoin from 'proper-url-join'
 import { useSearch } from './useSearch'
 import { useRecents } from './useRecents'
-import { Item } from './Item'
+import { LinkItem } from './LinkItem'
 import { Authenticated } from './authenticated'
 
 const prefs = getPreferenceValues()
@@ -27,6 +27,7 @@ const SearchBookmarks = () => {
       searchBarPlaceholder={`Search Otter, like "wordle"…`}
       onSearchTextChange={setSearchTerm}
       throttle
+      isShowingDetail={prefs.showDetailView}
     >
       {searchTerm ? (
         <>
@@ -46,7 +47,7 @@ const SearchBookmarks = () => {
           />
           {bookmarks?.length
             ? bookmarks.map((item) => {
-                return <Item key={item.id} {...item} />
+                return <LinkItem key={item.id} {...item} />
               })
             : null}
         </>
@@ -66,7 +67,7 @@ const SearchBookmarks = () => {
           />
           {recentBookmarks?.length
             ? recentBookmarks.map((item) => {
-                return <Item key={item.id} {...item} />
+                return <LinkItem key={item.id} {...item} />
               })
             : null}
         </>

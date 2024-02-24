@@ -5,7 +5,7 @@ import {
   List,
   getPreferenceValues,
 } from '@raycast/api'
-import { Item } from './Item'
+import { LinkItem } from './LinkItem'
 import urlJoin from 'proper-url-join'
 import { useRecents } from './useRecents'
 import { Authenticated } from './authenticated'
@@ -15,7 +15,11 @@ export const RecentBookmarks = () => {
   const prefs = getPreferenceValues()
 
   return (
-    <List isLoading={isLoading} searchBarPlaceholder="Filter…">
+    <List
+      isLoading={isLoading}
+      searchBarPlaceholder="Filter…"
+      isShowingDetail={prefs.showDetailView}
+    >
       <List.Item
         title={`View recent items in Otter`}
         icon={Icon.MagnifyingGlass}
@@ -30,7 +34,7 @@ export const RecentBookmarks = () => {
       />
       {bookmarks?.length
         ? bookmarks.map((item) => {
-            return <Item key={item.id} {...item} />
+            return <LinkItem key={item.id} {...item} />
           })
         : null}
     </List>

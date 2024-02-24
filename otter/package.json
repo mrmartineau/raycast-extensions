@@ -71,6 +71,15 @@
       "description": "Find this in your Supabase project API settings",
       "required": true,
       "default": ""
+    },
+    {
+      "name": "showDetailView",
+      "type": "checkbox",
+      "label": "Show detail view",
+      "title": "Show detail view to side or list view",
+      "description": "Show detail view to side or list view",
+      "required": true,
+      "default": true
     }
   ],
   "dependencies": {
