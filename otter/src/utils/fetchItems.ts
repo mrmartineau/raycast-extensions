@@ -1,8 +1,11 @@
 import { supabase } from '../supabase'
-import type { BaseBookmark } from '../types'
+import type { BaseBookmark, CollectionType, MetaTag, MetaType } from '../types'
 
-export const useFetchSearchItems = (searchTerm: string = '') => {
-  return supabase
+export const useFetchSearchItems = async (
+  searchTerm: string = '',
+  tag?: string
+) => {
+  let query = supabase
     .from('bookmarks')
     .select('*', { count: 'exact' })
     .or(
@@ -10,15 +13,53 @@ export const useFetchSearchItems = (searchTerm: string = '') => {
     )
     .match({ status: 'active' })
     .order('created_at', { ascending: false })
-    .returns<BaseBookmark[]>()
+
+  if (tag) {
+    if (tag === 'Untagged') {
+      query = query.eq('tags', '{}')
+    } else {
+      query = query.filter('tags', 'cs', `{${tag}}`)
+    }
+  }
+
+  return await query.returns<BaseBookmark[]>()
 }
 
-export const useFetchRecentItems = () => {
-  return supabase
+export const useFetchRecentItems = async (tag?: string) => {
+  let query = supabase
     .from('bookmarks')
     .select('*', { count: 'exact' })
     .limit(60)
     .match({ status: 'active' })
     .order('created_at', { ascending: false })
-    .returns<BaseBookmark[]>()
+
+  if (tag) {
+    if (tag === 'Untagged') {
+      query = query.eq('tags', '{}')
+    } else {
+      query = query.filter('tags', 'cs', `{${tag}}`)
+    }
+  }
+
+  return await query.returns<BaseBookmark[]>()
+}
+export const useFetchMeta = async () => {
+  const types = await supabase
+    .from('types_count')
+    .select('*')
+    .returns<MetaType[]>()
+  const tags = await supabase
+    .from('tags_count')
+    .select('*')
+    .returns<MetaTag[]>()
+  const collections = await supabase
+    .from('collection_tags_view')
+    .select('*')
+    .returns<CollectionType[]>()
+
+  return {
+    types: types.data || [],
+    tags: tags.data || [],
+    collections: collections.data || [],
+  }
 }

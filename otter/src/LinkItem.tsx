@@ -12,6 +12,7 @@ import tinyRelativeDate from 'tiny-relative-date'
 import { simpleUrl } from './utils/simpleUrl'
 import formatTitle from 'title'
 import { BaseBookmark, type BookmarkType } from './types'
+import { getFavicon } from '@raycast/utils'
 
 const typeToIcon = (type: BookmarkType | null) => {
   switch (type) {
@@ -104,16 +105,22 @@ export const LinkItem = ({
   }
 
   const descriptionDetail = `![](${image})\n\n${description}`
+  let detailViewContent = ''
+  if (description) {
+    detailViewContent += `### Description\n${description}\n`
+  }
+  if (note) {
+    detailViewContent += `### Note\n${note}`
+  }
 
   return (
     <List.Item
       title={title}
       subtitle={!showDetail ? description || '' : ''}
-      icon={{
-        source: `https://logo.clearbit.com/${simpleUrl(url)}`,
+      icon={getFavicon(url, {
         mask: Image.Mask.Circle,
         fallback: Icon.Bookmark,
-      }}
+      })}
       accessories={showDetail ? null : accessories}
       keywords={tags ?? []}
       actions={
@@ -122,6 +129,10 @@ export const LinkItem = ({
           <Action.OpenInBrowser
             url={urlJoin(prefs.otterBasePath, 'bookmark', id)}
             title="Open item in Otter"
+          />
+          <Action.OpenInBrowser
+            url={urlJoin(prefs.otterBasePath, 'bookmark', id, 'edit')}
+            title="Edit item in Otter"
           />
           <Action.CopyToClipboard title="Copy url" content={url} />
           {description ? (
@@ -142,10 +153,9 @@ export const LinkItem = ({
       }
       detail={
         <List.Item.Detail
-          markdown={description}
+          markdown={detailViewContent}
           metadata={
             <List.Item.Detail.Metadata>
-              {/* <List.Item.Detail.Metadata.Label title="Title" text={title} /> */}
               {tags?.length ? (
                 <List.Item.Detail.Metadata.TagList title="Tags">
                   {tags?.map((tag) => (
