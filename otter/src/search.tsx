@@ -7,23 +7,30 @@ import {
 } from '@raycast/api'
 import { useState } from 'react'
 import urlJoin from 'proper-url-join'
-import { useAuth } from './use-auth'
 import { useSearch } from './useSearch'
 import { useRecents } from './useRecents'
-import { Item } from './Item'
-import { Unauthorised } from './unauthorised'
+import { LinkItem } from './components/LinkItem'
+import { useMeta } from './useMeta'
+import { TagDropdown } from './components/TagDropdown'
+import { NoItems } from './components/NoItems'
+import { RecentTop } from './components/RecentTop'
+import { DEFAULT_TAG } from './constants'
+import { Authenticated } from './components/Authenticated'
 
-export default function Search() {
+const prefs = getPreferenceValues()
+
+const SearchBookmarks = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const authError = useAuth()
-  const { bookmarks: recentBookmarks, isLoading: recentIsLoading } =
-    useRecents()
-  const { bookmarks, isLoading } = useSearch(searchTerm)
+  const [activeTag, setActiveTag] = useState<string>(DEFAULT_TAG)
+  const { data: recentBookmarks, isLoading: recentIsLoading } =
+    useRecents(activeTag)
+  const { data: searchResults, isLoading } = useSearch(searchTerm, activeTag)
+  const { data: metadata } = useMeta()
   const bookmarksLoading = recentIsLoading || isLoading
-  const prefs = getPreferenceValues()
 
-  if (authError) {
-    return <Unauthorised authError={authError} />
+  const handleReset = () => {
+    setSearchTerm('')
+    setActiveTag(DEFAULT_TAG)
   }
 
   return (
@@ -33,50 +40,55 @@ export default function Search() {
       searchBarPlaceholder={`Search Otter, like "wordle"…`}
       onSearchTextChange={setSearchTerm}
       throttle
+      isShowingDetail={prefs.showDetailView}
+      searchBarAccessory={
+        <TagDropdown tags={metadata?.tags} onChange={setActiveTag} />
+      }
     >
       {searchTerm ? (
         <>
-          <List.Item
-            title={`View search results for "${searchTerm}" in Otter`}
-            icon={Icon.MagnifyingGlass}
-            actions={
-              <ActionPanel>
-                <Action.OpenInBrowser
-                  url={urlJoin(prefs.otterBasePath, 'search', {
-                    query: { q: searchTerm },
-                  })}
-                  title="Open search in Otter"
-                />
-              </ActionPanel>
-            }
-          />
-          {bookmarks?.length
-            ? bookmarks.map((item) => {
-                return <Item key={item.id} {...item} />
-              })
-            : null}
+          {searchResults?.length ? (
+            <>
+              <List.Item
+                title={`Open search in Otter`}
+                icon={Icon.MagnifyingGlass}
+                actions={
+                  <ActionPanel>
+                    <Action.OpenInBrowser
+                      url={urlJoin(prefs.otterBasePath, 'search', {
+                        query: { q: searchTerm },
+                      })}
+                      title="Open Search in Otter"
+                    />
+                  </ActionPanel>
+                }
+              />
+              {searchResults.map((item) => {
+                return <LinkItem key={`search-${item.id}`} {...item} />
+              })}
+            </>
+          ) : (
+            <NoItems onReset={handleReset} />
+          )}
         </>
       ) : (
         <>
-          <List.Item
-            title={`View latest items in Otter`}
-            icon={Icon.Bell}
-            actions={
-              <ActionPanel>
-                <Action.OpenInBrowser
-                  url={`https://otter.zander.wtf/feed`}
-                  title="Open latest items in Otter"
-                />
-              </ActionPanel>
-            }
-          />
-          {recentBookmarks?.length
-            ? recentBookmarks.map((item) => {
-                return <Item key={item.id} {...item} />
-              })
-            : null}
+          {recentBookmarks?.length ? (
+            <>
+              <RecentTop activeTag={activeTag} />
+              {recentBookmarks.map((item) => {
+                return <LinkItem key={`recent-${item.id}`} {...item} />
+              })}
+            </>
+          ) : (
+            <NoItems onReset={handleReset} />
+          )}
         </>
       )}
     </List>
   )
+}
+
+export default function Command() {
+  return <Authenticated component={SearchBookmarks} />
 }

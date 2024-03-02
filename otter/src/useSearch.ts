@@ -1,45 +1,14 @@
-import * as React from 'react'
-import { showHUD } from '@raycast/api'
-import { useCachedState } from '@raycast/utils'
-import { supabase } from './supabase'
+import { useCachedPromise } from '@raycast/utils'
 import { useFetchSearchItems } from './utils/fetchItems'
-import { BaseBookmark } from './types'
-import { useState } from 'react'
 
-export function useSearch(searchTerm: string) {
-  const [search, setSearch] = useState<BaseBookmark[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+export function useSearch(searchTerm: string, tag: string) {
+  const { data, isLoading, revalidate } = useCachedPromise(
+    async (searchTerm, tag) => {
+      const theTag = tag === 'all' ? undefined : tag
+      return await useFetchSearchItems(searchTerm, theTag)
+    },
+    [searchTerm, tag],
+  )
 
-  React.useEffect(() => {
-    const searchBookmarks = async () => {
-      console.log(`🚀 ~ searchBookmarks`)
-      setIsLoading(true)
-      const userRes = await supabase.auth.getUser()
-
-      if (!userRes.data.user) {
-        setIsLoading(false)
-        return
-      }
-
-      const { data, error } = await useFetchSearchItems(searchTerm)
-
-      if (error) {
-        showHUD(error.message)
-        setIsLoading(false)
-        return
-      }
-
-      if (data) {
-        // @ts-expect-error - types don't match
-        setSearch(data)
-        setIsLoading(false)
-      }
-    }
-
-    if (searchTerm) {
-      searchBookmarks()
-    }
-  }, [searchTerm])
-
-  return { bookmarks: search, isLoading }
+  return { data: data?.data, error: data?.error, isLoading, revalidate }
 }

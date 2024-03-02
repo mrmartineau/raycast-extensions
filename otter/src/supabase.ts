@@ -18,6 +18,25 @@ class Storage {
   }
 }
 
+export async function authorize() {
+  const rawSession = await LocalStorage.getItem('session')
+  const session = rawSession ? JSON.parse(String(rawSession)) : null
+  const { loginEmail: email, loginPassword: password } = prefs
+
+  if (session && email === session.user?.email) {
+    const { data, error } = await supabase.auth.setSession(session)
+    LocalStorage.setItem('session', JSON.stringify(data.session))
+    return { user: data.user, error }
+  } else {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    LocalStorage.setItem('session', JSON.stringify(data.session))
+    return { user: data.user, error }
+  }
+}
+
 export const supabase = createClient<Database>(
   prefs.supabaseUrl,
   prefs.supabaseAnonKey,
@@ -29,5 +48,5 @@ export const supabase = createClient<Database>(
       persistSession: true,
       detectSessionInUrl: false,
     },
-  }
+  },
 )

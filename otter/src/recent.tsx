@@ -1,44 +1,46 @@
-import {
-  Action,
-  ActionPanel,
-  Icon,
-  List,
-  getPreferenceValues,
-} from '@raycast/api'
-import { Item } from './Item'
-import urlJoin from 'proper-url-join'
-import { useAuth } from './use-auth'
+import { List, getPreferenceValues } from '@raycast/api'
+import { LinkItem } from './components/LinkItem'
 import { useRecents } from './useRecents'
-import { Unauthorised } from './unauthorised'
+import { TagDropdown } from './components/TagDropdown'
+import { useMeta } from './useMeta'
+import { useState } from 'react'
+import { NoItems } from './components/NoItems'
+import { RecentTop } from './components/RecentTop'
+import { DEFAULT_TAG } from './constants'
+import { Authenticated } from './components/Authenticated'
 
-export default function Recent() {
-  const authError = useAuth()
-  const { bookmarks, isLoading } = useRecents()
-  const prefs = getPreferenceValues()
+const prefs = getPreferenceValues()
 
-  if (authError) {
-    return <Unauthorised authError={authError} />
+export const RecentBookmarks = () => {
+  const [activeTag, setActiveTag] = useState<string>(DEFAULT_TAG)
+  const { data: recentBookmarks, isLoading } = useRecents(activeTag)
+  const { data: metadata } = useMeta()
+
+  const handleReset = () => {
+    setActiveTag(DEFAULT_TAG)
   }
 
   return (
-    <List isLoading={isLoading} searchBarPlaceholder="Filter…">
-      <List.Item
-        title={`View recent items in Otter`}
-        icon={Icon.MagnifyingGlass}
-        actions={
-          <ActionPanel>
-            <Action.OpenInBrowser
-              url={urlJoin(prefs.otterBasePath, 'feed')}
-              title="Open recent items in Otter"
-            />
-          </ActionPanel>
-        }
-      />
-      {bookmarks?.length
-        ? bookmarks.map((item) => {
-            return <Item key={item.id} {...item} />
-          })
-        : null}
+    <List
+      isLoading={isLoading}
+      searchBarPlaceholder="Filter…"
+      isShowingDetail={prefs.showDetailView}
+      searchBarAccessory={
+        <TagDropdown tags={metadata?.tags} onChange={setActiveTag} />
+      }
+    >
+      <RecentTop activeTag={activeTag} />
+      {recentBookmarks?.length ? (
+        recentBookmarks.map((item) => {
+          return <LinkItem key={`recent-${item.id}`} {...item} />
+        })
+      ) : (
+        <NoItems onReset={handleReset} />
+      )}
     </List>
   )
+}
+
+export default function Command() {
+  return <Authenticated component={RecentBookmarks} />
 }
