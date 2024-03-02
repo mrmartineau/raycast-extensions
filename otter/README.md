@@ -45,3 +45,5 @@ Raycast extension for [Otter](https://github.com/mrmartineau/Otter) bookmarks, a
 ## Note
 
 This extension relies on an instance of Otter being setup and running. You can find the source code for Otter [here](https://github.com/mrmartineau/Otter). The Otter app is built with React, Next.js and Supabase.
+
+> Made by Zander Martineau • [zander.wtf](https://zander.wtf) • [GitHub](https://github.com/mrmartineau/) • [Mastodon](https://main.elk.zone/toot.cafe/@zander)
