@@ -7,23 +7,26 @@ type TagDropdownProps = {
 }
 
 export const TagDropdown = ({ tags, onChange }: TagDropdownProps) => {
+  const untaggedItem = tags?.find((tag) => tag.tag === 'Untagged')
   return (
     <List.Dropdown tooltip="Select Tag" onChange={onChange}>
-      <List.Dropdown.Item title="All tags" value="all" key="all-tags" />
+      <List.Dropdown.Item title="All items" value="all" key="all-tags" />
       <List.Dropdown.Item
-        title="Untagged items"
+        title={`Untagged items${
+          untaggedItem?.count ? ` (${untaggedItem.count})` : ''
+        })`}
         value="Untagged"
         key="untagged-items"
       />
-      <List.Dropdown.Section>
-        {tags?.map(({ tag }, index) => {
+      <List.Dropdown.Section key="tag-items">
+        {tags?.map(({ tag, count }, index) => {
           if (!tag || tag === 'Untagged') {
             return null
           }
           return (
             <List.Dropdown.Item
               key={`${tag}-${index}`}
-              title={tag}
+              title={`${tag} (${count})`}
               value={tag}
               icon={Icon.Hashtag}
             />

@@ -9,12 +9,12 @@ import {
 } from '@raycast/api'
 import urlJoin from 'proper-url-join'
 import tinyRelativeDate from 'tiny-relative-date'
-import { simpleUrl } from './utils/simpleUrl'
 import formatTitle from 'title'
 import { BaseBookmark, type BookmarkType } from './types'
 import { getFavicon } from '@raycast/utils'
+import { simpleUrl } from './utils/simpleUrl'
 
-const typeToIcon = (type: BookmarkType | null) => {
+const typeToIcon = (type: BookmarkType) => {
   switch (type) {
     case 'article':
       return Icon.Document
@@ -43,14 +43,15 @@ const typeToIcon = (type: BookmarkType | null) => {
     case 'book':
       return Icon.Book
     default:
-      return null
+      return Icon.Bookmark
   }
 }
 
 type LinkItemProps = BaseBookmark
 
 const prefs = getPreferenceValues()
-const showDetail = prefs.showDetailView
+const showDetail = prefs?.showDetailView || true
+
 export const LinkItem = ({
   title,
   description,
@@ -74,11 +75,13 @@ export const LinkItem = ({
       icon: Icon.Calendar,
       tooltip: `Added: ${tinyRelativeDate(new Date(created_at))}`,
     },
-    {
+  ]
+  if (type) {
+    accessories.push({
       icon: typeToIcon(type),
       tooltip: formatTitle(type),
-    },
-  ]
+    })
+  }
   if (tags?.length) {
     accessories.push({
       icon: Icon.Hashtag,
@@ -105,22 +108,34 @@ export const LinkItem = ({
   }
 
   const descriptionDetail = `![](${image})\n\n${description}`
-  let detailViewContent = ''
+  let detailViewContent = `## ${title}\n\n`
   if (description) {
-    detailViewContent += `### Description\n${description}\n`
+    detailViewContent += `${description}\n`
   }
   if (note) {
     detailViewContent += `### Note\n${note}`
   }
 
+  let favicon
+
+  try {
+    favicon = getFavicon(url, {
+      mask: Image.Mask.Circle,
+      fallback: Icon.Bookmark,
+    })
+  } catch (err) {
+    favicon = {
+      source: `https://logo.clearbit.com/${simpleUrl(url)}`,
+      mask: Image.Mask.Circle,
+      fallback: Icon.Bookmark,
+    }
+  }
+
   return (
     <List.Item
       title={title}
-      subtitle={!showDetail ? description || '' : ''}
-      icon={getFavicon(url, {
-        mask: Image.Mask.Circle,
-        fallback: Icon.Bookmark,
-      })}
+      subtitle={showDetail ? '' : description || ''}
+      icon={favicon}
       accessories={showDetail ? null : accessories}
       keywords={tags ?? []}
       actions={
@@ -156,21 +171,30 @@ export const LinkItem = ({
           markdown={detailViewContent}
           metadata={
             <List.Item.Detail.Metadata>
+              <List.Item.Detail.Metadata.Link
+                title="URL"
+                target={url}
+                text={url}
+              />
               {tags?.length ? (
                 <List.Item.Detail.Metadata.TagList title="Tags">
                   {tags?.map((tag) => (
                     <List.Item.Detail.Metadata.TagList.Item
                       text={tag}
                       icon={Icon.Hashtag}
+                      key={`detail-tag-${tag}`}
                     />
                   ))}
                 </List.Item.Detail.Metadata.TagList>
               ) : null}
-              <List.Item.Detail.Metadata.Label
-                title="Type"
-                text={formatTitle(type)}
-                icon={typeToIcon(type)}
-              />
+              {type ? (
+                <List.Item.Detail.Metadata.Label
+                  title="Type"
+                  text={formatTitle(type)}
+                  icon={typeToIcon(type)}
+                />
+              ) : null}
+
               <List.Item.Detail.Metadata.Label
                 title="Date added"
                 text={tinyRelativeDate(new Date(created_at))}
