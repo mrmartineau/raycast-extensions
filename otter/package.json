@@ -29,6 +29,13 @@
       "subtitle": "Otter",
       "description": "Add new bookmark",
       "mode": "view"
+    },
+    {
+      "name": "menubar",
+      "title": "View Recent Bookmarks",
+      "description": "View recent Otter items",
+      "mode": "menu-bar",
+      "interval": "5m"
     }
   ],
   "preferences": [

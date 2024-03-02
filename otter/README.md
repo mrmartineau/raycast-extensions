@@ -1,6 +1,6 @@
 <div align="center">
   <h1><img
-        src="https://raw.githubusercontent.com/mrmartineau/Otter/main/public/otter-logo.svg"
+        src="https://raw.githubusercontent.com/mrmartineau/raycast-extensions/main/otter/assets/command-icon.png"
         width="90"
         height="90"
       /><br/>Otter bookmarking</h1>
@@ -32,6 +32,7 @@ Raycast extension for [Otter](https://github.com/mrmartineau/Otter) bookmarks, a
 - Search your Otter bookmarks
 - Browse your recent Otter bookmarks
 - Add a new bookmark to Otter
+- Menubar showing your recent bookmarks, collections and top 10 tags
 
 ## Extension settings
 

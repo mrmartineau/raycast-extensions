@@ -25,11 +25,11 @@ export const useFetchSearchItems = async (
   return await query.returns<Bookmark[]>()
 }
 
-export const useFetchRecentItems = async (tag?: string) => {
+export const useFetchRecentItems = async (tag?: string, limit: number = 60) => {
   let query = supabase
     .from('bookmarks')
     .select('*', { count: 'exact' })
-    .limit(60)
+    .limit(limit)
     .match({ status: 'active' })
     .order('created_at', { ascending: false })
 
