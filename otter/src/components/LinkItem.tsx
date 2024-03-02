@@ -10,44 +10,12 @@ import {
 import urlJoin from 'proper-url-join'
 import tinyRelativeDate from 'tiny-relative-date'
 import formatTitle from 'title'
-import { BaseBookmark, type BookmarkType } from './types'
+import { Bookmark } from '../types'
 import { getFavicon } from '@raycast/utils'
-import { simpleUrl } from './utils/simpleUrl'
+import { simpleUrl } from '../utils/simpleUrl'
+import { typeToIcon } from '../utils/typeToIcon'
 
-const typeToIcon = (type: BookmarkType) => {
-  switch (type) {
-    case 'article':
-      return Icon.Document
-    case 'video':
-      return Icon.Video
-    case 'audio':
-      return Icon.Music
-    case 'image':
-      return Icon.Image
-    case 'recipe':
-      return Icon.Leaf
-    case 'document':
-      return Icon.Document
-    case 'product':
-      return Icon.Car
-    case 'game':
-      return Icon.GameController
-    case 'link':
-      return Icon.Link
-    case 'note':
-      return Icon.Snippets
-    case 'event':
-      return Icon.Clock
-    case 'place':
-      return Icon.Pin
-    case 'book':
-      return Icon.Book
-    default:
-      return Icon.Bookmark
-  }
-}
-
-type LinkItemProps = BaseBookmark
+type LinkItemProps = Bookmark
 
 const prefs = getPreferenceValues()
 const showDetail = prefs?.showDetailView || true
@@ -116,8 +84,7 @@ export const LinkItem = ({
     detailViewContent += `### Note\n${note}`
   }
 
-  let favicon
-
+  let favicon: Image.ImageLike
   try {
     favicon = getFavicon(url, {
       mask: Image.Mask.Circle,
@@ -136,20 +103,21 @@ export const LinkItem = ({
       title={title}
       subtitle={showDetail ? '' : description || ''}
       icon={favicon}
-      accessories={showDetail ? null : accessories}
+      accessories={accessories}
       keywords={tags ?? []}
       actions={
         <ActionPanel>
-          <Action.OpenInBrowser url={url} title="Open url" />
+          <Action.OpenInBrowser url={url} title="Open Url" />
           <Action.OpenInBrowser
             url={urlJoin(prefs.otterBasePath, 'bookmark', id)}
-            title="Open item in Otter"
+            title="Open Item in Otter"
           />
           <Action.OpenInBrowser
             url={urlJoin(prefs.otterBasePath, 'bookmark', id, 'edit')}
-            title="Edit item in Otter"
+            title="Edit Item in Otter"
+            icon={Icon.Pencil}
           />
-          <Action.CopyToClipboard title="Copy url" content={url} />
+          <Action.CopyToClipboard title="Copy Url" content={url} />
           {description ? (
             <Action.Push
               title="View Description"

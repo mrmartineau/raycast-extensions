@@ -22,8 +22,8 @@ export const RecentTop = ({ activeTag }: RecentTopProps) => {
         isAll
           ? `Open recent items in Otter`
           : isUntagged
-          ? `Open untagged items in Otter`
-          : `Open "${activeTag}" in Otter`
+            ? `Open untagged items in Otter`
+            : `Open "${activeTag}" in Otter`
       }
       icon={isNotActive ? Icon.Eye : Icon.Hashtag}
       actions={

@@ -1,5 +1,5 @@
 import { Icon, List } from '@raycast/api'
-import type { MetaResponse } from './types'
+import type { MetaResponse } from '../types'
 
 type TagDropdownProps = {
   tags?: MetaResponse['tags']
@@ -7,19 +7,26 @@ type TagDropdownProps = {
 }
 
 export const TagDropdown = ({ tags, onChange }: TagDropdownProps) => {
-  const untaggedItem = tags?.find((tag) => tag.tag === 'Untagged')
+  if (!tags?.length) {
+    return null
+  }
+
+  const untaggedItem = tags.find((tag) => tag.tag === 'Untagged')
+
   return (
     <List.Dropdown tooltip="Select Tag" onChange={onChange}>
       <List.Dropdown.Item title="All items" value="all" key="all-tags" />
-      <List.Dropdown.Item
-        title={`Untagged items${
-          untaggedItem?.count ? ` (${untaggedItem.count})` : ''
-        })`}
-        value="Untagged"
-        key="untagged-items"
-      />
+      {untaggedItem?.count ? (
+        <List.Dropdown.Item
+          title={`Untagged items${
+            untaggedItem.count ? ` (${untaggedItem.count})` : ''
+          })`}
+          value="Untagged"
+          key="untagged-items"
+        />
+      ) : null}
       <List.Dropdown.Section key="tag-items">
-        {tags?.map(({ tag, count }, index) => {
+        {tags.map(({ tag, count }, index) => {
           if (!tag || tag === 'Untagged') {
             return null
           }

@@ -9,16 +9,15 @@ import { useState } from 'react'
 import urlJoin from 'proper-url-join'
 import { useSearch } from './useSearch'
 import { useRecents } from './useRecents'
-import { LinkItem } from './LinkItem'
-import { Authenticated } from './authenticated'
+import { LinkItem } from './components/LinkItem'
 import { useMeta } from './useMeta'
-import { TagDropdown } from './TagDropdown'
-import { NoItems } from './NoItems'
-import { RecentTop } from './RecentTop'
+import { TagDropdown } from './components/TagDropdown'
+import { NoItems } from './components/NoItems'
+import { RecentTop } from './components/RecentTop'
+import { DEFAULT_TAG } from './constants'
+import { Authenticated } from './components/Authenticated'
 
 const prefs = getPreferenceValues()
-
-export const DEFAULT_TAG = 'all'
 
 const SearchBookmarks = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -59,7 +58,7 @@ const SearchBookmarks = () => {
                       url={urlJoin(prefs.otterBasePath, 'search', {
                         query: { q: searchTerm },
                       })}
-                      title="Open search in Otter"
+                      title="Open Search in Otter"
                     />
                   </ActionPanel>
                 }

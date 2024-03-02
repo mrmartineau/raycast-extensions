@@ -7,7 +7,7 @@ export function useRecents(tag: string) {
       const theTag = tag === 'all' ? undefined : tag
       return await useFetchRecentItems(theTag)
     },
-    [tag]
+    [tag],
   )
 
   return { data: data?.data, error: data?.error, isLoading, revalidate }

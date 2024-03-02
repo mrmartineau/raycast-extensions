@@ -5,7 +5,7 @@ import {
   Icon,
   openExtensionPreferences,
 } from '@raycast/api'
-import { useAuth } from './use-auth'
+import { useAuth } from '../use-auth'
 
 export const Authenticated = ({
   component: Component,

@@ -1,13 +1,13 @@
 import { List, getPreferenceValues } from '@raycast/api'
-import { LinkItem } from './LinkItem'
+import { LinkItem } from './components/LinkItem'
 import { useRecents } from './useRecents'
-import { Authenticated } from './authenticated'
-import { TagDropdown } from './TagDropdown'
+import { TagDropdown } from './components/TagDropdown'
 import { useMeta } from './useMeta'
 import { useState } from 'react'
-import { DEFAULT_TAG } from './search'
-import { NoItems } from './NoItems'
-import { RecentTop } from './RecentTop'
+import { NoItems } from './components/NoItems'
+import { RecentTop } from './components/RecentTop'
+import { DEFAULT_TAG } from './constants'
+import { Authenticated } from './components/Authenticated'
 
 const prefs = getPreferenceValues()
 

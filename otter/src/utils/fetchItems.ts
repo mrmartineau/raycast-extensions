@@ -1,15 +1,15 @@
 import { supabase } from '../supabase'
-import type { BaseBookmark, CollectionType, MetaTag, MetaType } from '../types'
+import type { Bookmark, CollectionType, MetaTag, MetaType } from '../types'
 
 export const useFetchSearchItems = async (
   searchTerm: string = '',
-  tag?: string
+  tag?: string,
 ) => {
   let query = supabase
     .from('bookmarks')
     .select('*', { count: 'exact' })
     .or(
-      `title.ilike.*${searchTerm}*,url.ilike.*${searchTerm}*,description.ilike.*${searchTerm}*,note.ilike.*${searchTerm}*,tags.cs.{${searchTerm}}`
+      `title.ilike.*${searchTerm}*,url.ilike.*${searchTerm}*,description.ilike.*${searchTerm}*,note.ilike.*${searchTerm}*,tags.cs.{${searchTerm}}`,
     )
     .match({ status: 'active' })
     .order('created_at', { ascending: false })
@@ -22,7 +22,7 @@ export const useFetchSearchItems = async (
     }
   }
 
-  return await query.returns<BaseBookmark[]>()
+  return await query.returns<Bookmark[]>()
 }
 
 export const useFetchRecentItems = async (tag?: string) => {
@@ -41,7 +41,7 @@ export const useFetchRecentItems = async (tag?: string) => {
     }
   }
 
-  return await query.returns<BaseBookmark[]>()
+  return await query.returns<Bookmark[]>()
 }
 export const useFetchMeta = async () => {
   const types = await supabase

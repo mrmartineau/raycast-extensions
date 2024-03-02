@@ -7,7 +7,7 @@ export function useSearch(searchTerm: string, tag: string) {
       const theTag = tag === 'all' ? undefined : tag
       return await useFetchSearchItems(searchTerm, theTag)
     },
-    [searchTerm, tag]
+    [searchTerm, tag],
   )
 
   return { data: data?.data, error: data?.error, isLoading, revalidate }

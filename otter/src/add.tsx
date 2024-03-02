@@ -52,7 +52,7 @@ export default () => {
     <Form
       actions={
         <ActionPanel>
-          <Action.SubmitForm title="Add url" onSubmit={handleSubmit} />
+          <Action.SubmitForm title="Add Url" onSubmit={handleSubmit} />
         </ActionPanel>
       }
     >
