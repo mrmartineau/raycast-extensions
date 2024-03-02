@@ -1,19 +1,24 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "otter",
-  "title": "Otter",
-  "description": "View, search and add Otter bookmarks",
+  "title": "Otter Bookmarks",
+  "description": "Companion bookmarking utility for Otter bookmarks",
   "subtitle": "Otter",
   "icon": "command-icon.png",
   "author": "mrmartineau",
   "license": "MIT",
+  "categories": [
+    "Applications",
+    "Productivity"
+  ],
   "commands": [
     {
       "name": "search",
       "title": "Search",
       "subtitle": "Otter",
       "description": "Search Otter",
-      "mode": "view"
+      "mode": "view",
+      "interval": "10m"
     },
     {
       "name": "recent",
@@ -89,6 +94,13 @@
       "default": true
     }
   ],
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "lint": "ray lint",
+    "lint:fix": "ray lint --fix",
+    "publish": "npx @raycast/api@latest publish"
+  },
   "dependencies": {
     "@raycast/api": "^1.68.1",
     "@raycast/utils": "^1.10.0",
@@ -108,12 +120,5 @@
     "eslint": "^8.51.0",
     "react-devtools": "^4.28.4",
     "typescript": "^5.2.2"
-  },
-  "scripts": {
-    "build": "ray build -e dist",
-    "dev": "ray develop",
-    "lint": "ray lint",
-    "lint:fix": "ray lint --fix",
-    "publish": "npx @raycast/api@latest publish"
   }
 }
