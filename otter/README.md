@@ -32,7 +32,7 @@ Raycast extension for [Otter](https://github.com/mrmartineau/Otter) bookmarks, a
 - Search your Otter bookmarks
 - Browse your recent Otter bookmarks
 - Add a new bookmark to Otter
-- Menubar showing your recent bookmarks, collections and top 10 tags
+- Menubar showing your recent bookmarks, types and top 10 tags
 
 ## Extension settings
 
