@@ -5,6 +5,7 @@
   "description": "This extension allows to search through an Algolia index directly from Raycast.",
   "icon": "command-icon.png",
   "author": "mrmartineau",
+  "owner": "zedd-emm",
   "license": "MIT",
   "commands": [
     {
