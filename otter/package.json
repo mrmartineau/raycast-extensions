@@ -6,6 +6,7 @@
   "subtitle": "Otter",
   "icon": "command-icon.png",
   "author": "mrmartineau",
+  "owner": "zedd-emm",
   "license": "MIT",
   "categories": [
     "Applications",
