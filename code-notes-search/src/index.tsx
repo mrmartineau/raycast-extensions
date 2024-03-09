@@ -66,8 +66,7 @@ export default function main() {
     ;(async () => {
       const initialSearchResults = await search()
       const sortedSearchResultsByDate = initialSearchResults.sort(
-        // @ts-ignore
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
       )
       setSearchResults(sortedSearchResultsByDate)
     })()
