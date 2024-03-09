@@ -12,13 +12,13 @@ type ExtensionPreferences = {
   "loginEmail": string,
   /** Password - Your password on otter.zander.wtf */
   "loginPassword": string,
-  /** Otter instance url - e.g. https://otter.zander.wtf */
+  /** Otter Instance URL - e.g. https://otter.zander.wtf */
   "otterBasePath": string,
-  /** Supabase project url - Find this in your Supabase project API settings. e.g. https://ffpbylcvwtyozyrplqic.supabase.co */
+  /** Supabase Project URL - Find this in your Supabase project API settings. e.g. https://ffpbylcvwtyozyrplqic.supabase.co */
   "supabaseUrl": string,
   /** Supabase Anon API Key - Find this in your Supabase project API settings */
   "supabaseAnonKey": string,
-  /** Show detail view to side or list view - Show detail view to side or list view */
+  /** Show Detail View to Side or List View - Show detail view to side or list view */
   "showDetailView": boolean
 }
 
