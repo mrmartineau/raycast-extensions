@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "code-notes-search",
-  "title": "Search my Code Notes with Algolia",
-  "description": "This extension allows to search through an Algolia index directly from Raycast.",
+  "title": "11ty Code Notes Search",
+  "description": "Search your code notes",
   "icon": "command-icon.png",
   "author": "mrmartineau",
   "owner": "zedd-emm",
@@ -11,7 +11,7 @@
     {
       "name": "index",
       "title": "Code Notes Search",
-      "description": "Search through an Algolia index directly from Raycast.",
+      "description": "Search your code notes",
       "mode": "view",
       "preferences": [
         {
