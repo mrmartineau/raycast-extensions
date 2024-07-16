@@ -32,6 +32,12 @@ declare namespace Preferences {
   export type Recent = ExtensionPreferences & {}
   /** Preferences accessible in the `add` command */
   export type Add = ExtensionPreferences & {}
+  /** Preferences accessible in the `tags` command */
+  export type Tags = ExtensionPreferences & {}
+  /** Preferences accessible in the `collections` command */
+  export type Collections = ExtensionPreferences & {}
+  /** Preferences accessible in the `bookmark-types` command */
+  export type BookmarkTypes = ExtensionPreferences & {}
   /** Preferences accessible in the `menubar` command */
   export type Menubar = ExtensionPreferences & {}
 }
@@ -43,6 +49,12 @@ declare namespace Arguments {
   export type Recent = {}
   /** Arguments passed to the `add` command */
   export type Add = {}
+  /** Arguments passed to the `tags` command */
+  export type Tags = {}
+  /** Arguments passed to the `collections` command */
+  export type Collections = {}
+  /** Arguments passed to the `bookmark-types` command */
+  export type BookmarkTypes = {}
   /** Arguments passed to the `menubar` command */
   export type Menubar = {}
 }
