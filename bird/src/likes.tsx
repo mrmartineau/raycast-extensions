@@ -9,7 +9,6 @@ export default function LikesCommand() {
     error,
     loadMore,
     canLoadMore,
-    currentCount,
     maxCount,
   } = useBirdCommand("likes")
 
@@ -42,7 +41,11 @@ export default function LikesCommand() {
               icon={Icon.Download}
               actions={
                 <ActionPanel>
-                  <Action title="Load More" icon={Icon.Download} onAction={loadMore} />
+                  <Action
+                    title="Load More"
+                    icon={Icon.Download}
+                    onAction={loadMore}
+                  />
                 </ActionPanel>
               }
             />
