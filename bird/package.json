@@ -5,6 +5,7 @@
   "description": "View your X/Twitter bookmarks and likes using the bird CLI",
   "icon": "command-icon.png",
   "author": "mrmartineau",
+  "owner": "zedd-emm",
   "license": "MIT",
   "categories": [
     "Applications",
@@ -14,14 +15,14 @@
     {
       "name": "bookmarks",
       "title": "View Bookmarks",
-      "subtitle": "Bird Bookmarks",
+      "subtitle": "Bird",
       "description": "View your X/Twitter bookmarks",
       "mode": "view"
     },
     {
       "name": "likes",
       "title": "View Likes",
-      "subtitle": "Bird Bookmarks",
+      "subtitle": "Bird",
       "description": "View your X/Twitter likes",
       "mode": "view"
     }
