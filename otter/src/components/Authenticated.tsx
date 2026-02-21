@@ -9,14 +9,14 @@ import { useAuth } from '../use-auth'
 import type { ReactNode } from 'react'
 
 export const Authenticated = ({ children }: { children: ReactNode }) => {
-  const { data: user, isLoading, error } = useAuth()
+  const { isLoading, error } = useAuth()
 
   if (isLoading) {
     return <Detail isLoading />
   }
 
-  if (error || !user) {
-    const markdown = `### Error: ${error?.name}\n\n${error?.message}`
+  if (error) {
+    const markdown = `### Error: Authentication failed\n\n${error.message}`
     return (
       <Detail
         markdown={markdown}

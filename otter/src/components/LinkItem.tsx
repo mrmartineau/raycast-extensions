@@ -81,7 +81,10 @@ export const LinkItem = ({
     detailViewContent += `${description}\n`
   }
   if (note) {
-    detailViewContent += `### Note\n${note}`
+    detailViewContent += `### Note\n${note}\n`
+  }
+  if (image) {
+    detailViewContent += `\n![](${image})`
   }
 
   let favicon: Image.ImageLike

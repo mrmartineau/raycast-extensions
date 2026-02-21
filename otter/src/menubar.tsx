@@ -17,8 +17,8 @@ const prefs = getPreferenceValues()
 
 export default function MenubarCommand() {
   const { isLoading: authIsLoading, error } = useAuth()
-  const { data, isLoading } = useRecents('all', 9)
-  const { data: metadata } = useMeta()
+  const { data, isLoading } = useRecents('all', 9, !authIsLoading && !error)
+  const { data: metadata } = useMeta(!authIsLoading && !error)
   const tags = metadata?.tags.slice(0, 10)
   const recentAllBookmarks = data?.slice(0, 9)
 
@@ -29,7 +29,7 @@ export default function MenubarCommand() {
         isLoading={authIsLoading}
       >
         <MenuBarExtra.Item
-          title={`${error.name} Click here to update your settings fix it.`}
+          title="Authentication failed. Click to update settings."
           icon={Icon.Alarm}
           onAction={openExtensionPreferences}
         />
