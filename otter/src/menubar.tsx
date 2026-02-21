@@ -17,8 +17,8 @@ const prefs = getPreferenceValues()
 
 export default function MenubarCommand() {
   const { isLoading: authIsLoading, error } = useAuth()
-  const { data, isLoading } = useRecents('all', 9)
-  const { data: metadata } = useMeta()
+  const { data, isLoading } = useRecents('all', 9, !authIsLoading && !error)
+  const { data: metadata } = useMeta(!authIsLoading && !error)
   const tags = metadata?.tags.slice(0, 10)
   const recentAllBookmarks = data?.slice(0, 9)
 
