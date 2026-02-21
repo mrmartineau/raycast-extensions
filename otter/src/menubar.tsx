@@ -29,7 +29,7 @@ export default function MenubarCommand() {
         isLoading={authIsLoading}
       >
         <MenuBarExtra.Item
-          title={`${error.name} Click here to update your settings fix it.`}
+          title="Authentication failed. Click to update settings."
           icon={Icon.Alarm}
           onAction={openExtensionPreferences}
         />

@@ -9,7 +9,8 @@ import type { NpmFetchResponse } from './npmResponse.model'
 import type { HistoryItem } from './utils/history-storage'
 import { useFavorites } from './useFavorites'
 
-const API_PATH = 'https://www.npmjs.com/search/suggestions?q='
+export const API_PATH = 'https://www.npmjs.com/search/suggestions?q='
+
 export default function PackageList() {
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [debouncedSearchTermForHistory] = useDebounce(searchTerm, 600)

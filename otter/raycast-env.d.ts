@@ -8,10 +8,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 type ExtensionPreferences = {
-  /** Email - Your email on otter.zander.wtf */
-  "loginEmail": string,
-  /** Password - Your password on otter.zander.wtf */
-  "loginPassword": string,
+  /** OAuth Client ID - Your OAuth client ID from Supabase */
+  "oauthClientId": string,
   /** Otter Instance URL - e.g. https://otter.zander.wtf */
   "otterBasePath": string,
   /** Supabase Project URL - Find this in your Supabase project API settings. e.g. https://ffpbylcvwtyozyrplqic.supabase.co */
